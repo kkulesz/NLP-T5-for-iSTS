@@ -10,18 +10,32 @@ class IstsDataset(Dataset):
         self.data = []
 
         for index, row in dataframe.iterrows():
-            # TODO: i don't know whether we should predict both values at the same time
-            #   or maybe do two separate tasks
-            x = f"stsb: sentence1: {row['x1']} sentence2: {row['x2']}"
-            y = f"{row['y_type']} {row['y_score']}"
-            self.data.append((x, y))
+            x_score = f"stsb: sentence1: {row['x1']} sentence2: {row['x2']}"
+            y_score = row['y_score']
+
+            x_type = f"multilabel classification: sentence1: {row['x1']} sentence2: {row['x2']}"
+            y_type = row['y_type']
+            self.data.append(
+                ((x_score, y_score), (x_type, y_type))
+            )
 
     def __getitem__(self, idx):
-        x, y = self.data[idx]
+        score_items, type_items = self.data[idx]
+        x_score, y_score = score_items
+        x_type, y_type = type_items
 
+        score_tokenized = self._prepare_items(x_score, y_score)
+        type_tokenized = self._prepare_items(x_type, y_type)
+
+        return score_tokenized, type_tokenized
+
+    def __len__(self):
+        return len(self.data)
+
+    def _prepare_items(self, x, y):
         # cleaning data so as to ensure data is in string type
-        x_text = " ".join(x.split())
-        target_text = " ".join(y.split())
+        x_text = " ".join(str(x).split())
+        target_text = " ".join(str(y).split())
 
         x_tokenized = self._tokenize(x_text, self.max_input_length)
         y_tokenized = self._tokenize(target_text, self.max_target_length)
@@ -31,9 +45,6 @@ class IstsDataset(Dataset):
         target_ids = y_tokenized["input_ids"].squeeze().to(dtype=torch.long)
 
         return x_ids, x_mask, target_ids
-
-    def __len__(self):
-        return len(self.data)
 
     def _tokenize(self, text, length):
         return self.tokenizer.batch_encode_plus(

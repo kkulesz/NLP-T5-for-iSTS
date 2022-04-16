@@ -32,6 +32,7 @@ def transformers_pytorch(trainer_config):
 
 def transformers_trainer(trainer_config):
     pass
+    # TODO:
     # data = load_dataset('csv', data_files={'train': [train_path], 'test': [test_path]})
     # print(data)
     # train_dataset = dataset['train']
@@ -41,15 +42,9 @@ def transformers_trainer(trainer_config):
     # trainer.train()
 
 
-test_file_name = f'test_data.tsv'
-train_file_name = f'test_data.tsv'
 if __name__ == '__main__':
-    test_path = os.path.join(consts.answers_students_data, test_file_name)
-    train_path = os.path.join(consts.answers_students_data, train_file_name)
-
     config = TrainerConfig()  # TODO: parse arguments
 
     # simple_transformers(config)
     # transformers_pytorch(config)
     transformers_trainer(config)
-

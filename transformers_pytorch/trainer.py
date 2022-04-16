@@ -38,14 +38,16 @@ class TrainerPytorch:
                 attention_mask=score_input_mask,
                 decoder_input_ids=score_target_ids
             )
-            loss = outputs.loss
+            # loss = outputs.loss
+            #
+            # if idx % 10 == 0:
+            #     print(loss)
+            #
+            # self.optimizer.zero_grad()
+            # loss.backward()
+            # self.optimizer.step()
 
-            if idx % 10 == 0:
-                print(loss)
 
-            self.optimizer.zero_grad()
-            loss.backward()
-            self.optimizer.step()
         #     self.model.eval()
         #     generated_ids = self.model.generate(
         #         input_ids=score_input_ids,

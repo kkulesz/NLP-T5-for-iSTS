@@ -36,10 +36,9 @@ class TrainerSimpletransformers:
         self.model = T5Model("t5", self.config.model_type, use_cuda=False, args=model_args)
 
     def train(self):
-        # self.model.train_model(
-        #     self.train_score_df,
-        #     eval_data=self.test_score_df,
-        #     output_dir="output"
-        # )
-
-        self.model.save_model("12345")
+        self.model.train_model(
+            self.train_score_df,
+            eval_data=self.test_score_df,
+            output_dir="output"
+        )
+        # TODO save and load model somehow

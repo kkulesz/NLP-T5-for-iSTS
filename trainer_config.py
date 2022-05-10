@@ -1,3 +1,5 @@
+from simpletransformers.t5 import T5Args
+
 import consts
 
 
@@ -12,3 +14,9 @@ class TrainerConfig:
         self.max_input_size = max_input_size
         self.max_target_size = max_target_size
         self.learning_rate = learning_rate
+
+    def to_t5_args(self) -> T5Args:
+        return T5Args(
+            learning_rate=self.learning_rate,
+            # TODO:
+        )

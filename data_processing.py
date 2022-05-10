@@ -20,3 +20,18 @@ def for_type(df):
     return new_df
 
 
+def for_eval(df):
+    result = []
+    for _, row in enumerate(df):
+        result.append(row['prefix'] + ": " + row['input_text'])
+    return result
+
+
+def for_type_eval(df):
+    preprocessed = for_type(df)
+    return for_eval(preprocessed)
+
+
+def for_score_eval(df):
+    preprocessed = for_score(df)
+    return for_eval(preprocessed)

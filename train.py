@@ -1,6 +1,5 @@
 import pandas as pd
 import os
-import torch
 
 import utils
 import consts

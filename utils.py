@@ -3,6 +3,7 @@ import numpy as np
 import os
 import random
 
+
 def seed_torch(seed=2137):
     #  taken from: https://github.com/pytorch/pytorch/issues/7068
     random.seed(seed)

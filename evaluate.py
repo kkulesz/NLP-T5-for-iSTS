@@ -13,14 +13,15 @@ test_data_path = os.path.join(dataset, consts.test_data_file_name)
 if __name__ == '__main__':
     utils.seed_torch()
 
-    # config = TrainerConfig()  # TODO: parse arguments
-    # t5_args = config.to_t5_args()
-    #
-    # data = pd.read_csv(test_data_path, sep='\t').astype(str)
-    # score_data = for_score_eval(data)
-    # type_data = for_type_eval(data)
-    #
-    # model = T5Wrapper.pretrained("TODO", t5_args)
-    #
-    # score_predictions = model.predict(score_data)
-    # type_predictions = model.predict(type_data)
+    config = TrainerConfig()  # TODO: parse arguments
+    t5_args = config.to_t5_args()
+
+    data = pd.read_csv(test_data_path, sep='\t').astype(str)
+    score_data = for_score_eval(data)
+    type_data = for_type_eval(data)
+
+    model_dir = consts.default_model_output_dir  # TODO: change to proper dir
+    model = T5Wrapper.pretrained(model_dir, t5_args)
+
+    score_predictions = model.predict(score_data)
+    type_predictions = model.predict(type_data)

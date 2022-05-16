@@ -7,8 +7,7 @@ from trainer_config import TrainerConfig
 from data_processing import for_type, for_score
 from t5_wrapper import T5Wrapper
 
-dataset = consts.answers_students_data
-train_data_path = os.path.join(dataset, consts.train_data_file_name)
+train_data_path = os.path.join(consts.current_dataset, consts.train_data_file_name)
 
 if __name__ == '__main__':
     utils.seed_torch()
@@ -22,4 +21,14 @@ if __name__ == '__main__':
 
     model = T5Wrapper.naked(t5_args)
 
-    model.train(score_data)
+    if consts.train_both:
+        print(f"Training both tasks on: {consts.current_dataset}")
+        both_data = score_data.append(type_data, ignore_index=True)
+        model.train(both_data)
+    else:
+        if consts.train_type:
+            print(f"Training TYPE task on: {consts.current_dataset}")
+            model.train(type_data)
+        else:
+            print(f"Training SCORE task on: {consts.current_dataset}")
+            model.train(score_data)

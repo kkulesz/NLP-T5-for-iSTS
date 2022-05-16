@@ -17,6 +17,14 @@ default_model_output_dir = "model_storage"
 #####################################
 # -------- Training parameters ------
 #####################################
-MODEL_TYPE = "t5-small"  # model_type: t5-small t5-base t5-large t5-3b t5-11b
+MODEL_TYPE = "t5"  # t5 mt5 byt5
+MODEL_NAME = 't5-small'  # t5-small t5-base t5-large t5-3b t5-11b
 
 LEARNING_RATE = 1e-4
+
+#####################################
+# -------- Current variant --==------
+#####################################
+train_both = False  # jeżeli typ i ocena uczone oddzielnie
+train_type = True  # jeżeli powyższe = false -> wybiera którego zadania uczymy
+current_dataset = answers_students_data  # headlines_data, images_data

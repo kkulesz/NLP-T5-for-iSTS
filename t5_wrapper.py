@@ -36,6 +36,9 @@ class T5Wrapper:
         return T5Wrapper(model)
 
     def train(self, data):
+        """
+        trains model on given data AND saves it to 'output_dir' given in T5Args
+        """
         self.model.train_model(
             train_data=data,
             show_running_loss=False

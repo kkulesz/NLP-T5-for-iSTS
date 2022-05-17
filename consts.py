@@ -25,6 +25,9 @@ LEARNING_RATE = 1e-4
 #####################################
 # -------- Current variant --==------
 #####################################
-train_both = False  # jeżeli typ i ocena uczone oddzielnie
-train_type = True  # jeżeli powyższe = false -> wybiera którego zadania uczymy
+BOTH = 'both'
+TYPE = 'type'
+SCORE = 'score'
+
+current_variant = BOTH
 current_dataset = answers_students_data  # headlines_data, images_data

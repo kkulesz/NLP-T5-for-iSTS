@@ -3,7 +3,6 @@ import os
 
 import utils
 import consts
-from trainer_config import TrainerConfig
 from data_processing import for_type, for_score
 from t5_wrapper import T5Wrapper
 
@@ -12,7 +11,7 @@ train_data_path = os.path.join(consts.current_dataset, consts.train_data_file_na
 if __name__ == '__main__':
     utils.seed_torch()
 
-    config = TrainerConfig()  # TODO: parse arguments
+    config = utils.parse_arguments()
     t5_args = config.to_t5_args()
 
     data = pd.read_csv(train_data_path, sep='\t').astype(str)
@@ -21,14 +20,13 @@ if __name__ == '__main__':
 
     model = T5Wrapper.naked(t5_args)
 
-    if consts.train_both:
-        print(f"Training both tasks on: {consts.current_dataset}")
+    print(f"Training {consts.current_variant} on: {consts.current_dataset}")
+    if consts.current_variant == consts.BOTH:
         both_data = score_data.append(type_data, ignore_index=True)
         model.train(both_data)
+    elif consts.current_variant == consts.TYPE:
+        model.train(type_data)
+    elif consts.current_variant == consts.SCORE:
+        model.train(score_data)
     else:
-        if consts.train_type:
-            print(f"Training TYPE task on: {consts.current_dataset}")
-            model.train(type_data)
-        else:
-            print(f"Training SCORE task on: {consts.current_dataset}")
-            model.train(score_data)
+        raise Exception("Invalid training variant!")

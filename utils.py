@@ -3,6 +3,8 @@ import numpy as np
 import os
 import random
 
+from config import Config
+
 
 def seed_torch(seed=2137):
     #  taken from: https://github.com/pytorch/pytorch/issues/7068
@@ -14,3 +16,8 @@ def seed_torch(seed=2137):
     torch.cuda.manual_seed_all(seed)  # if you are using multi-GPU.
     torch.backends.cudnn.benchmark = False
     torch.backends.cudnn.deterministic = True
+
+
+def parse_arguments() -> Config:
+    # TODO
+    return Config()

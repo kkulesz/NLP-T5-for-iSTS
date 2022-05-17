@@ -30,3 +30,5 @@ if __name__ == '__main__':
         model.train(score_data)
     else:
         raise Exception("Invalid training variant!")
+
+    print("Finished!")

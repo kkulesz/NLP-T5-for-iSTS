@@ -25,11 +25,13 @@ if __name__ == '__main__':
     if consts.current_variant == consts.BOTH or consts.current_variant == consts.TYPE:
         type_labels = data['y_type'].tolist()
         type_predictions = model.predict(type_data)
-        # TODO
+        print(type_labels)
+        print(type_predictions)
     if consts.current_variant == consts.BOTH or consts.current_variant == consts.SCORE:
         score_labels = data['y_score'].tolist()
         score_predictions = model.predict(score_data)
-        # TODO
+        print(score_labels)
+        print(score_predictions)
 
     # TODO: trzeba jakos obliczyc metryki, są gotowe funkcje w pakiecie (chyba) sklearn, ale on dał jakies skrypty perlowe
     #   i nie wiem czy to za ich pomocą powinniśmy to policzyć czy co

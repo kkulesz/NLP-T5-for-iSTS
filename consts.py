@@ -29,5 +29,5 @@ BOTH = 'both'
 TYPE = 'type'
 SCORE = 'score'
 
-current_variant = BOTH
+current_variant = SCORE
 current_dataset = answers_students_data  # headlines_data, images_data

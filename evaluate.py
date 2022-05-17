@@ -9,7 +9,7 @@ from t5_wrapper import T5Wrapper
 test_data_path = os.path.join(consts.current_dataset, consts.test_data_file_name)
 
 if __name__ == '__main__':
-    utils.seed_torch()
+    utils.prepare_environment()
 
     config = utils.parse_arguments()
     t5_args = config.to_t5_args()

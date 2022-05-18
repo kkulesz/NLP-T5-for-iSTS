@@ -27,11 +27,18 @@ if __name__ == '__main__':
         type_predictions = model.predict(type_data)
         print(type_labels)
         print(type_predictions)
+        df = pd.DataFrame({'type_labels': type_labels,
+                           'type_predictions': type_predictions})
+        df.to_csv("out.csv", index=False)
+
     if consts.current_variant == consts.BOTH or consts.current_variant == consts.SCORE:
         score_labels = data['y_score'].tolist()
         score_predictions = model.predict(score_data)
         print(score_labels)
         print(score_predictions)
+        df = pd.DataFrame({'score_labels': score_labels,
+                           'score_predictions': score_predictions})
+        df.to_csv("out.csv", index=False)
 
     # TODO: trzeba jakos obliczyc metryki, są gotowe funkcje w pakiecie (chyba) sklearn, ale on dał jakies skrypty perlowe
     #   i nie wiem czy to za ich pomocą powinniśmy to policzyć czy co

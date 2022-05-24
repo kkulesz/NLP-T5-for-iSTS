@@ -34,9 +34,11 @@ if __name__ == '__main__':
     if consts.current_variant == consts.BOTH or consts.current_variant == consts.SCORE:
         score_labels = data['y_score'].tolist()
         score_predictions = model.predict(score_data)
+        chunks1 = data['x1']
+        chunks2 = data['x2']
         print(score_labels)
         print(score_predictions)
-        df = pd.DataFrame({'score_labels': score_labels,
+        df = pd.DataFrame({'chunk1':chunks1, 'chunk2':chunks2, 'score_labels': score_labels,
                            'score_predictions': score_predictions})
         df.to_csv("out.csv", index=False)
 

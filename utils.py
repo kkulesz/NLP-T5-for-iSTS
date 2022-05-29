@@ -49,8 +49,6 @@ def parse_arguments() -> Config:
     # parser.add_option("-e", "--epochs", type="int", dest="epochs", default=1)
     (options, args) = parser.parse_args()
 
-    print(options.learning_rate)
-
     return Config(model_type=options.model_type,
                   model_name=options.model_name,
                   learning_rate=options.learning_rate,

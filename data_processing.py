@@ -5,7 +5,7 @@ def for_score(df):
     new_df = pd.DataFrame()
     new_df['input_text'] = df.apply(lambda r: "sentence1: " + r["x1"] + " sentence2: " + r["x2"], axis=1)
     new_df['target_text'] = df['y_score']
-    new_df['prefix'] = 'similarity'  # TODO: stsb?
+    new_df['prefix'] = 'stsb'  # TODO: stsb?
 
     return new_df
 

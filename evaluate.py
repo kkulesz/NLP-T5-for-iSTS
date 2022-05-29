@@ -21,26 +21,11 @@ if __name__ == '__main__':
     model_dir = consts.default_model_output_dir
     model = T5Wrapper.pretrained(model_dir, t5_args)
 
-    print(f"Evaluating for {consts.current_variant} on {consts.current_dataset}...")
-    if consts.current_variant == consts.BOTH or consts.current_variant == consts.TYPE:
-        type_labels = data['y_type'].tolist()
-        type_predictions = model.predict(type_data)
-        print(type_labels)
-        print(type_predictions)
-        df = pd.DataFrame({'type_labels': type_labels,
-                           'type_predictions': type_predictions})
-        df.to_csv("out.csv", index=False)
+    type_predictions = model.predict(type_data)
+    score_predictions = model.predict(score_data)
 
-    if consts.current_variant == consts.BOTH or consts.current_variant == consts.SCORE:
-        score_labels = data['y_score'].tolist()
-        score_predictions = model.predict(score_data)
-        chunks1 = data['x1']
-        chunks2 = data['x2']
-        print(score_labels)
-        print(score_predictions)
-        df = pd.DataFrame({'chunk1':chunks1, 'chunk2':chunks2, 'score_labels': score_labels,
-                           'score_predictions': score_predictions})
-        df.to_csv("out.csv", index=False)
+    df = pd.DataFrame({'type_predictions': type_predictions, 'score_predictions': score_predictions})
+    df.to_csv("out.csv", index=False)
 
     # TODO: trzeba jakos obliczyc metryki, są gotowe funkcje w pakiecie (chyba) sklearn, ale on dał jakies skrypty perlowe
     #   i nie wiem czy to za ich pomocą powinniśmy to policzyć czy co

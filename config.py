@@ -25,7 +25,7 @@ class Config:
             model_name=self.model_name,
             learning_rate=self.learning_rate,
             output_dir=self.model_output_dir,
-
+            num_train_epochs=10,
             train_batch_size=1  # CUDA on my comp out of memory if greater ;/
         )
 

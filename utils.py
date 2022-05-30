@@ -3,6 +3,7 @@ import numpy as np
 import os
 import random
 import warnings
+import json
 from optparse import OptionParser
 
 from config import Config
@@ -44,12 +45,22 @@ def parse_arguments() -> Config:
     parser.add_option("-n", "--model_name", type="string", dest="model_name", default="t5-small")
     parser.add_option("-r", "--learning_rate", type="float", dest="learning_rate", default=1e-4)
     parser.add_option("-o", "--model_output_dir", type="string", dest="model_output_dir", default="model_storage")
+    parser.add_option("-j", "--json", action="store_true", dest="json", default=False)
     # parser.add_option("-v", "--variant", type="string", dest="variant", default="both")
     # parser.add_option("-d", "--dataset", type="string", dest="dataset", default="/data/answers-students")
     # parser.add_option("-e", "--epochs", type="int", dest="epochs", default=1)
     (options, args) = parser.parse_args()
 
-    return Config(model_type=options.model_type,
-                  model_name=options.model_name,
-                  learning_rate=options.learning_rate,
-                  model_output_dir=options.model_output_dir)
+    if options.json:
+        with open("config.json", "r") as read_file:
+            data = json.load(read_file)
+            print(data['learning_rate'])
+            return Config(model_type=data['model_type'],
+                          model_name=data['model_name'],
+                          learning_rate=data['learning_rate'],
+                          model_output_dir=data['model_output_dir'])
+    else:
+        return Config(model_type=options.model_type,
+                      model_name=options.model_name,
+                      learning_rate=options.learning_rate,
+                      model_output_dir=options.model_output_dir)

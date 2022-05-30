@@ -1,0 +1,6 @@
+{
+  "model_type": "t5",
+  "model_name": "t5-small",
+  "learning_rate": 0.2137,
+  "model_output_dir": "model_storage"
+}
